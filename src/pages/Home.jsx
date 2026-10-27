@@ -40,11 +40,6 @@ const Home = () => {
       onSearch()
   }
 
-  useEffect(() => {
-    movieSearch();
-  }, []);
-
-
   return (
     <>
         <Navbar />
@@ -54,14 +49,14 @@ const Home = () => {
             id="Title" 
             placeholder="Search by Title" 
             onChange={(event) => setSearchMovies(event.target.value)}
-            onKeyPress={(event) => event.key === 'Enter' && navigate('/Movies ')}
+            onKeyPress={(event) => event.key === 'Enter' && navigate('/Movies', { state: { searchTitle: searchMovies }})}
           >
           </input>
-          <button onClick={() => navigate('/Movies')}>Search</button>
+          <button onClick={() => navigate('/Movies', { state: { searchTitle: searchMovies }})}>Search</button>
         </div>
         <div className="movie-list">
           {movies.map((movie) => (
-            <div className="movie">
+            <div className="movie" key={movie.imdbId}>
                 <div className="movie-card">
                   <h3 className="card__title">{movie.Title}</h3>
                   <p>Release Date: {movie.Year}</p>

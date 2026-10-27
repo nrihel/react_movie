@@ -110,23 +110,24 @@ h3 {
 .movie__search {
     width: 100%;
     position: relative;
-    padding: 36px;
+    padding: 25px;
     margin-bottom: 4px;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 input {
     height: 60px;
-    width: 65%;
+    width: 50%;
     background-color: white;
     box-shadow: 7px 7px 14px rgba(134, 93, 204, .3);
     border-radius: 20px;
     font-size: 32px;
     color: black;
     display: inline-block;
-    padding-left: 100px;
-    margin-left: 20px;
+    padding-left: 80px;
+    margin-left: 10px;
 }
 
 button {
@@ -148,9 +149,10 @@ button {
 } 
 
 .sort {
-    display: flex;
-    justify-content: center;
-    padding: 24px;
+    height: 60px;
+    width: auto;
+    padding: 8px;
+    margin-left: 24px;
 }
 
 select {
