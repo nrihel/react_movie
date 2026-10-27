@@ -49,14 +49,16 @@ const Home = () => {
             id="Title" 
             placeholder="Search by Title" 
             onChange={(event) => setSearchMovies(event.target.value)}
-            onKeyPress={(event) => event.key === 'Enter' && navigate('/Movies', { state: { searchTitle: searchMovies }})}
+            onKeyPress={(event) => 
+              event.key === 'Enter' && 
+              navigate(`/Movies?search=${encodeURIComponent(searchMovies)}`)}
           >
           </input>
-          <button onClick={() => navigate('/Movies', { state: { searchTitle: searchMovies }})}>Search</button>
+          <button onClick={() => navigate(`/Movies?search=${encodeURIComponent(searchMovies)}`)}>Search</button>
         </div>
         <div className="movie-list">
           {movies.map((movie) => (
-            <div className="movie" key={movie.imdbId}>
+            <div className="movie" key={movie.imdbID}>
                 <div className="movie-card">
                   <h3 className="card__title">{movie.Title}</h3>
                   <p>Release Date: {movie.Year}</p>

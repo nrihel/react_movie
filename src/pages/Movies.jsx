@@ -23,10 +23,19 @@ const Movies = () => {
         setSearchParams({ search: searchTitle});
     }
     async function movieSearch (title) {
-        const { data } = await axios.get
-        (`https://www.omdbapi.com/?apikey=db4e97d3&s=${title}`)
-        console.log(data)
+        try {
+            setLoading(true);
+            const { data } = await axios.get(
+                `https://www.omdbapi.com/?apikey=db4e97d3&s=${title}`
+            );
         setSearchMovies(data.Search || []);
+        } catch (error) {
+            console.error("couldn't find movies", error);
+        } finally {
+            setTimeout(() => {
+                setLoading(false);
+            }, 500);
+        }
     }
 
     function sortMovies(movies, option) {
@@ -51,6 +60,9 @@ const Movies = () => {
     <>
     <Navbar />
         <div className="movie__search">
+            {loading ? (
+                <SearchSkeleton />
+            ) : searchMovie?.Response === 'True' ? (
             <button onClick={onSearch}>Search</button>
             <input 
                 type="text" 
@@ -61,8 +73,16 @@ const Movies = () => {
             >
             </input>        
             <div className="sort">
-                <select id="filter" onChange={(event) => setSearchMovies((movies) => sortMovies(movies, event.target.value))}>
-                <option value="" disabled selected>Sort</option>
+                <select 
+                    id="filter" 
+                    defaultValue=""
+                    onChange={(event) => 
+                        setSearchMovies((movies) => 
+                            sortMovies(movies, event.target.value)
+                        )
+                    }
+                    >
+                <option value="" disabled>Sort</option>
                 <option value="newest">Newest</option>
                 <option value="oldest">Oldest</option>
                 <option value="a-z">A - Z</option>
@@ -72,7 +92,7 @@ const Movies = () => {
         </div>
         <div className="movie-list">
             {searchMovies.map((movie) => (
-            <div className="movie">
+            <div className="movie" key={movie.imdbID}>
                 <div className="movie-card" onClick={() => 
                     navigate(`/Details/${movie.imdbID}`, {
                         state: { search: title }
@@ -83,11 +103,13 @@ const Movies = () => {
                 </div>
               </div>
             )
-          )}
+            ) : (
+                <p>Movies could not be loaded</p>
+        )}
           </div>        
     <Footer />
     </>
   )
 }
 
-export default Movies
+export default Movies;
