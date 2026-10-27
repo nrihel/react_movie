@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import axios from 'axios'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Details = () => {
+    let navigate = useNavigate();
     const { imdbID } = useParams();
     const [movie, setMovie] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -31,11 +32,39 @@ const Details = () => {
   return (
     <>
     <Navbar />
-        <div classname="details">
-            <div className="details-img.">
-                <img className="poster" src={movie.poster} alt="movie poster"></img>
+        <div className="details">
+        {loading ? (
+            <p>Loading...</p>
+        ) : movie?.Response === 'True' ? (
+            <div className="details-card">
+                <div className="details-body">
+                    <div className="details__top">
+                        <div className="details__header">
+                            <button className="details__button" onClick={() => navigate('/Movies')}>← Back</button>
+                            <h1 className="details-card__title">{movie.Title}</h1>
+                        </div>
+                    </div>
+                    <div className="details__info--container">
+                        <section className="details__img--wrapper">
+                            <img className="details__img" src={movie.Poster} alt={movie.Title} />
+                        </section> 
+                        <section className="details__info">
+                            <p className="movie__detail">Genre: {movie.Genre}</p>
+                            <p className="movie__detail">Description: {movie.Plot}</p>
+                            <p className="movie__detail">Actors: {movie.Actors}</p>
+                            <p className="movie__detail">Director: {movie.Director}</p>
+                            <p className="movie__detail">Rating: {movie.Rated}</p>
+                            <p className="movie__detail">Released: {movie.Year}</p>
+                            <p className="movie__detail">Runtime: {movie.Runtime}</p>
+                            <p className="movie__detail">Score: {movie.imdbRating}/10</p>
+                        </section>
+                    </div>
+                </div>
             </div>
-        </div>
+        ) : (
+            <p>Movie details could not be loaded.</p>
+        )}
+    </div> 
     <Footer />  
     </>
   )

@@ -2,9 +2,10 @@ import React, { useEffect, useState, useMemo } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import axios from 'axios';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 const Movies = () => {
+    const {imdbID} = useParams();
     const navigate = useNavigate();
     const location = useLocation();
     const title = location.state?.searchTitle || '';
@@ -71,7 +72,7 @@ const Movies = () => {
         <div className="movie-list">
             {searchMovies.map((movie) => (
             <div className="movie">
-                <div className="movie-card" onClick={() => navigate('/Details/${movie.imdbID}')}>
+                <div className="movie-card" onClick={() => navigate(`/Details/${movie.imdbID}`)}>
                   <h3 className="card__title">{movie.Title}</h3>
                   <p>Release Date: {movie.Year}</p>
                   <img className="movie__image" src={movie.Poster} alt={movie.Title} />
