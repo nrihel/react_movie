@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import axios from 'axios'
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 const Details = () => {
+    const location = useLocation();
+    const search = location.state?.search || '';
     let navigate = useNavigate();
     const { imdbID } = useParams();
     const [movie, setMovie] = useState(null);
@@ -40,7 +42,8 @@ const Details = () => {
                 <div className="details-body">
                     <div className="details__top">
                         <div className="details__header">
-                            <button className="details__button" onClick={() => navigate('/Movies')}>← Back</button>
+                            <button className="details__button" onClick={() => 
+                                navigate(`/Movies?search=${encodeURIComponent(search)}`)}>← Back</button>
                             <h1 className="details-card__title">{movie.Title}</h1>
                         </div>
                     </div>

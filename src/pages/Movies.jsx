@@ -2,13 +2,14 @@ import React, { useEffect, useState, useMemo } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import axios from 'axios';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 const Movies = () => {
     const {imdbID} = useParams();
+    const [searchParams, setSearchParams] = useSearchParams()
+    const title = searchParams.get('search') || '';
     const navigate = useNavigate();
     const location = useLocation();
-    const title = location.state?.searchTitle || '';
     const [searchMovies, setSearchMovies] = useState([]);
     const [searchTitle, setSearchTitle] = useState('');
     const [loading, setLoading] = useState(true);
@@ -19,7 +20,7 @@ const Movies = () => {
     }, [title]);
 
     function onSearch() {
-        movieSearch(searchTitle);
+        setSearchParams({ search: searchTitle});
     }
     async function movieSearch (title) {
         const { data } = await axios.get
@@ -72,7 +73,10 @@ const Movies = () => {
         <div className="movie-list">
             {searchMovies.map((movie) => (
             <div className="movie">
-                <div className="movie-card" onClick={() => navigate(`/Details/${movie.imdbID}`)}>
+                <div className="movie-card" onClick={() => 
+                    navigate(`/Details/${movie.imdbID}`, {
+                        state: { search: title }
+                    })}>
                   <h3 className="card__title">{movie.Title}</h3>
                   <p>Release Date: {movie.Year}</p>
                   <img className="movie__image" src={movie.Poster} alt={movie.Title} />

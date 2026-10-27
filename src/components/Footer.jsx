@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <div>
       <footer>
-        <p>&copy;Nick Rihel 2026
+        <p>&copy;Nick Rihel 2026  Powered by OMDBapi
         </p>
     </footer>
     </div>
