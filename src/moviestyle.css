@@ -111,7 +111,7 @@ h3 {
     width: 100%;
     position: relative;
     padding: 36px;
-    margin-top: 24px;
+    margin-bottom: 4px;
     display: flex;
     justify-content: center;
 }
@@ -131,7 +131,7 @@ input {
 
 button {
     margin-left: 20px;
-    border: 1px solid rgb(253, 4, 4);
+    border: none;
     background-color: rgb(253, 4, 4);
     box-shadow: 7px 7px 14px rgba(134, 93, 204, .3);
     color: white;
@@ -211,11 +211,10 @@ option {
 }
 
 .movie__image {
-    width: 75%;
-    height: 350px;
-    align-items: center;
-    margin-left: 30px;
-    transform: translateY(25px);
+    width: 220px;
+    height: 320px;
+    margin: 16px, auto, 0;
+    transform: none;
 }
 
 .movie-list {
@@ -231,9 +230,12 @@ option {
 }
 
 .movie-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
     width: 300px;
-    height: 500px;
+    height: 480px;
     padding: 10px;
     margin: 24px;
     box-shadow: 7px 7px 14px rgba(134, 93, 204, .3);
@@ -244,6 +246,7 @@ option {
 
 .card__title {
     font-size: 22px;
+    min-height: 100px;
 }
 
 footer {

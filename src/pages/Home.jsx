@@ -3,9 +3,12 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import axios from 'axios';
 import "../moviestyle.css"
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+  let navigate = useNavigate();
   const [movies, setMovies] = useState([]);
+  const [searchMovies, setSearchMovies] = useState([]);
 
   async function getMovies () {
     const { data } = await axios.get
@@ -21,9 +24,41 @@ const Home = () => {
   useEffect(() => {
     getMovies();
   }, []);
+
+  function onSearch() {
+    movieSearch(searchMovies)
+  }
+
+  async function movieSearch (title) {
+    const { data } = await axios.get
+    (`https://www.omdbapi.com/?apikey=db4e97d3&s=${title}`)
+    setSearchMovies(data);
+  }
+
+  function onSearchKeyPress(key) {
+    if (key === 'Enter')
+      onSearch()
+  }
+
+  useEffect(() => {
+    movieSearch();
+  }, []);
+
+
   return (
     <>
         <Navbar />
+        <div className="movie__search">
+          <input 
+            type="text" 
+            id="Title" 
+            placeholder="Search by Title" 
+            onChange={(event) => setSearchMovies(event.target.value)}
+            onKeyPress={(event) => event.key === 'Enter' && navigate('/Movies')}
+          >
+          </input>
+          <button onClick={() => navigate('/Movies')}>Search</button>
+        </div>
         <div className="movie-list">
           {movies.map((movie) => (
             <div className="movie">
