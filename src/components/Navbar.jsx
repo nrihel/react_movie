@@ -13,7 +13,7 @@ const Navbar = () => {
             <Link to="/" className="link 
             link__hover-effect
             link__hover-effect--white">Home</Link>
-            <Link to="" className="link 
+            <Link to="/Movies" className="link 
             link__hover-effect 
             link__hover-effect--white">Search</Link>
         </ul>

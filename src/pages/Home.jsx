@@ -54,7 +54,7 @@ const Home = () => {
             id="Title" 
             placeholder="Search by Title" 
             onChange={(event) => setSearchMovies(event.target.value)}
-            onKeyPress={(event) => event.key === 'Enter' && navigate('/Movies')}
+            onKeyPress={(event) => event.key === 'Enter' && navigate('/Movies ')}
           >
           </input>
           <button onClick={() => navigate('/Movies')}>Search</button>
@@ -66,11 +66,11 @@ const Home = () => {
                   <h3 className="card__title">{movie.Title}</h3>
                   <p>Release Date: {movie.Year}</p>
                   <img className="movie__image" src={movie.Poster} alt={movie.Title} />
-                  </div>
+                </div>
               </div>
-          )
-        )}
-        </div>
+            )
+          )}
+          </div>
         <Footer />
     </>
   )
