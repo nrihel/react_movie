@@ -31,14 +31,16 @@ const Movies = () => {
         const sorted = [...movies];
 
         if (option === "oldest") {
-            sorted.sort((a, b) => parseInt(a.year) - parseInt(b.year));            
+            sorted.sort((a, b) => parseInt(a.Year) - parseInt(b.Year));            
         } else if (option === "newest") {
-            sorted.sort((a, b) => parseInt(b.year) - parseInt(a.year));
+            sorted.sort((a, b) => parseInt(b.Year) - parseInt(a.Year));
         } else if (option === "a-z") {
-            sorted.sort((a, b) => a.Title.localCompare(b.Title));
+            sorted.sort((a, b) => a.Title.localeCompare(b.Title));
         } else if (option === "z-a") {
-            sorted.sort((a, b) => b.Title.localCompare(a.Title));
+            sorted.sort((a, b) => b.Title.localeCompare(a.Title));
         }
+
+        return sorted;
     } 
 
 
@@ -57,7 +59,7 @@ const Movies = () => {
             >
             </input>        
             <div className="sort">
-                <select id="filter" onChange="filterMovie(event)">
+                <select id="filter" onChange={(event) => setSearchMovies((movies) => sortMovies(movies, event.target.value))}>
                 <option value="" disabled selected>Sort</option>
                 <option value="newest">Newest</option>
                 <option value="oldest">Oldest</option>
@@ -69,7 +71,7 @@ const Movies = () => {
         <div className="movie-list">
             {searchMovies.map((movie) => (
             <div className="movie">
-                <div className="movie-card" onClick={() => navigate('/Details')}>
+                <div className="movie-card" onClick={() => navigate('/Details/${movie.imdbID}')}>
                   <h3 className="card__title">{movie.Title}</h3>
                   <p>Release Date: {movie.Year}</p>
                   <img className="movie__image" src={movie.Poster} alt={movie.Title} />

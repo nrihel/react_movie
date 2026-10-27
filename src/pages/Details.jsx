@@ -13,7 +13,7 @@ const Details = () => {
         try {
             setLoading(true);
             const movieData = await axios.get(
-                `https://www.omdbapi.com/?apikey=db4e97d3&s=${imdbID}`
+                `https://www.omdbapi.com/?apikey=db4e97d3&i=${imdbID}`
             );
             setMovie(movieData.data);
         } catch (error) {
@@ -31,7 +31,11 @@ const Details = () => {
   return (
     <>
     <Navbar />
-
+        <div classname="details">
+            <div className="details-img.">
+                <img className="poster" src={movie.poster} alt="movie poster"></img>
+            </div>
+        </div>
     <Footer />  
     </>
   )
