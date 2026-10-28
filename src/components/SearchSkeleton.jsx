@@ -3,7 +3,7 @@ import React from 'react'
 const SearchSkeleton = () => {
   return (
     <>
-        <div className="movie-search">
+        <div className="movie__search">
             <div className="skeleton skeleton-button"></div>
             <div className="skeleton skeleton-search"></div>
             <div className="skeleton skeleton-button"></div>  

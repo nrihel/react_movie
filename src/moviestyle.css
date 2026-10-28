@@ -354,14 +354,23 @@ footer {
 }
 
 .skeleton-search {
+    width: 500px;
+    height: 44px;
     background: #e0e0e0;
     border-radius: 8px;
     animation: pulse 1.5s ease-in-out infinite;
 }
 
 .skeleton-button {
-    
+    margin: 24px;
+    width: 100px;
+    height: 44px;
+}
 
+.skeleton-card {
+    width: 250px;
+    height: 375px;
+    margin: 16px;
 }
 
 .skeleton {
