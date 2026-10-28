@@ -62,7 +62,7 @@ const Movies = () => {
         <div className="movie__search">
             {loading ? (
                 <SearchSkeleton />
-            ) : searchMovie?.Response === 'True' ? (
+            ) : searchMovies?.Response === 'True' ? (
             <button onClick={onSearch}>Search</button>
             <input 
                 type="text" 
