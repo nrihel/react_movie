@@ -15,34 +15,6 @@ const Home = () => {
   const [searchMovies, setSearchMovies] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if(title) movieSearch(title);
-  }, [title]);
-
-  async function getMovies () {
-    try {
-      setLoading(true);
-    const { data } = await axios.get
-    (`https://www.omdbapi.com/?apikey=db4e97d3&s=box`)
-
-    const randomMovies = (data.Search || [])
-      .sort(() => Math.random() - 0.5)
-      .slice(0, 6);
-
-    setMovies(randomMovies);
-    } catch (error) {
-      console.error("couldn't find movies", error);
-    } finally {
-      setTimeout(() => {
-        setLoading(false);
-      }, 500);
-    }
-  }
-
-  useEffect(() => {
-    getMovies();
-  }, []);
-
   function onSearch() {
     movieSearch(searchMovies)
   }
@@ -61,10 +33,7 @@ const Home = () => {
   return (
     <>
         <Navbar />
-        {loading ? (
-          <SearchSkeleton />
-        ) : (
-          <>
+      
         <div className="movie__search">
           <input 
             type="text" 
@@ -78,26 +47,9 @@ const Home = () => {
           </input>
           <button onClick={() => navigate(`/Movies?search=${encodeURIComponent(searchMovies)}`)}>Search</button>
         </div>
-
-        <div className="movie-list">
-          {movies.map((movie) => (
-            <div className="movie" key={movie.imdbID}>
-                <div className="movie-card"
-                  onClick={() => 
-                    navigate(`/Details/${movie.imdbID}`, {
-                      state: { search: title },
-                    })
-                  }>
-                  <h3 className="card__title">{movie.Title}</h3>
-                  <p>Release Date: {movie.Year}</p>
-                  <img className="movie__image" src={movie.Poster} alt={movie.Title} />
-                </div>
-              </div>
-            )
-          )}
-          </div>
-          </>
-        )}
+        <div className="home">
+          <img className="home__img" src="/movie theater.svg" alt="theater"></img>
+        </div>
         <Footer />
     </>
   )
