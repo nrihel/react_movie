@@ -58,61 +58,75 @@ const Movies = () => {
 
 
   return (
-    <>
+  <>
     <Navbar />
-        <>
-        {loading ? (
-            <SearchSkeleton />
-        ) : searchMovies?.Response === 'True' ? (
-        <div className="movie-search">
-            <button onClick={onSearch}>Search</button>
-            <input 
-                type="text" 
-                id="Title" 
-                placeholder="Search by Title" 
-                onChange={(event) => setSearchTitle(event.target.value)}
-                onKeyDown={(event) => event.key === 'Enter' && onSearch()}
+
+    {loading ? (
+      <SearchSkeleton />
+    ) : (
+      <>
+        <div className="movie__search">
+          <button onClick={onSearch}>Search</button>
+
+          <input
+            type="text"
+            id="Title"
+            placeholder="Search by Title"
+            onChange={(event) => setSearchTitle(event.target.value)}
+            onKeyDown={(event) => event.key === 'Enter' && onSearch()}
+          />
+
+          <div className="sort">
+            <select
+              id="filter"
+              defaultValue=""
+              onChange={(event) =>
+                setSearchMovies((movies) =>
+                  sortMovies(movies, event.target.value)
+                )
+              }
             >
-            </input>        
-            <div className="sort">
-                <select 
-                    id="filter" 
-                    defaultValue=""
-                    onChange={(event) => 
-                        setSearchMovies((movies) => 
-                            sortMovies(movies, event.target.value)
-                        )
-                    }
-                    >
-                <option value="" disabled>Sort</option>
-                <option value="newest">Newest</option>
-                <option value="oldest">Oldest</option>
-                <option value="a-z">A - Z</option>
-                <option value="z-a">Z - A</option>        
-                </select>
-            </div>
+              <option value="" disabled>Sort</option>
+              <option value="newest">Newest</option>
+              <option value="oldest">Oldest</option>
+              <option value="a-z">A - Z</option>
+              <option value="z-a">Z - A</option>
+            </select>
+          </div>
         </div>
+
         <div className="movie-list">
-            {searchMovies.length > 0 ? (
+          {searchMovies.length > 0 ? (
             searchMovies.map((movie) => (
-            <div className="movie" key={movie.imdbID}>
-                <div className="movie-card" onClick={() => 
+              <div className="movie" key={movie.imdbID}>
+                <div
+                  className="movie-card"
+                  onClick={() =>
                     navigate(`/Details/${movie.imdbID}`, {
-                        state: { search: title }
-                    })}>
+                      state: { search: title },
+                    })
+                  }
+                >
                   <h3 className="card__title">{movie.Title}</h3>
                   <p>Release Date: {movie.Year}</p>
-                  <img className="movie__image" src={movie.Poster} alt={movie.Title} />
+                  <img
+                    className="movie__image"
+                    src={movie.Poster}
+                    alt={movie.Title}
+                  />
                 </div>
               </div>
             ))
-            ) : (
-                <p>Movies could not be loaded</p>
-            </>
-        )}
+          ) : (
+            <p>Movies could not be loaded</p>
+          )}
+        </div>
+      </>
+    )}
+
     <Footer />
-    </>
-  )
-}
+  </>
+);
+};
 
 export default Movies;
