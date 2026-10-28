@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import SearchSkeleton from '../components/SearchSkeleton';
 import axios from 'axios';
 import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
@@ -12,7 +13,7 @@ const Movies = () => {
     const location = useLocation();
     const [searchMovies, setSearchMovies] = useState([]);
     const [searchTitle, setSearchTitle] = useState('');
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(Boolean(title));
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -59,17 +60,18 @@ const Movies = () => {
   return (
     <>
     <Navbar />
-        <div className="movie__search">
-            {loading ? (
-                <SearchSkeleton />
-            ) : searchMovies?.Response === 'True' ? (
+        <>
+        {loading ? (
+            <SearchSkeleton />
+        ) : searchMovies?.Response === 'True' ? (
+        <div className="movie-search">
             <button onClick={onSearch}>Search</button>
             <input 
                 type="text" 
                 id="Title" 
                 placeholder="Search by Title" 
                 onChange={(event) => setSearchTitle(event.target.value)}
-                onKeyPress={(event) => event.key === 'Enter' && onSearch()}
+                onKeyDown={(event) => event.key === 'Enter' && onSearch()}
             >
             </input>        
             <div className="sort">
@@ -91,7 +93,8 @@ const Movies = () => {
             </div>
         </div>
         <div className="movie-list">
-            {searchMovies.map((movie) => (
+            {searchMovies.length > 0 ? (
+            searchMovies.map((movie) => (
             <div className="movie" key={movie.imdbID}>
                 <div className="movie-card" onClick={() => 
                     navigate(`/Details/${movie.imdbID}`, {
@@ -102,11 +105,11 @@ const Movies = () => {
                   <img className="movie__image" src={movie.Poster} alt={movie.Title} />
                 </div>
               </div>
-            )
+            ))
             ) : (
                 <p>Movies could not be loaded</p>
+            </>
         )}
-          </div>        
     <Footer />
     </>
   )
