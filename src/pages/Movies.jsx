@@ -117,7 +117,7 @@ const Movies = () => {
                 </div>
                 ))
             ) : (
-                <p>Movies could not be loaded</p>
+                <h2 className="movie__reload">Search for any Movie!!</h2>
             )}
             </div>
           </>

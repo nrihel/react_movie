@@ -4,23 +4,30 @@ import Footer from "../components/Footer";
 import SearchSkeleton from '../components/SearchSkeleton';
 import axios from 'axios';
 import "../moviestyle.css";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 const Home = () => {
+  const {imdbID} = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const title = searchParams.get('search') || '';
   let navigate = useNavigate();
   const [movies, setMovies] = useState([]);
   const [searchMovies, setSearchMovies] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    if(title) movieSearch(title);
+  }, [title]);
+
   async function getMovies () {
     try {
       setLoading(true);
     const { data } = await axios.get
-    (`https://www.omdbapi.com/?apikey=db4e97d3&s=star`)
+    (`https://www.omdbapi.com/?apikey=db4e97d3&s=box`)
 
     const randomMovies = (data.Search || [])
       .sort(() => Math.random() - 0.5)
-      .slice(0, 3);
+      .slice(0, 6);
 
     setMovies(randomMovies);
     } catch (error) {
@@ -75,7 +82,12 @@ const Home = () => {
         <div className="movie-list">
           {movies.map((movie) => (
             <div className="movie" key={movie.imdbID}>
-                <div className="movie-card">
+                <div className="movie-card"
+                  onClick={() => 
+                    navigate(`/Details/${movie.imdbID}`, {
+                      state: { search: title },
+                    })
+                  }>
                   <h3 className="card__title">{movie.Title}</h3>
                   <p>Release Date: {movie.Year}</p>
                   <img className="movie__image" src={movie.Poster} alt={movie.Title} />

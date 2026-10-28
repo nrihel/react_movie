@@ -200,18 +200,11 @@ option {
     transform: translateY(-75px);
 }
 
-.fa-spinner {
-    font-size: 100px;
-    animation: rotate 500ms linear infinite;
-}
-
-@keyframes rotate {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+.movie__reload {
+    display: flex;
+    justify-content: center;
+    color: white;
+    margin: 150px;
 }
 
 .movie__image {
@@ -302,7 +295,6 @@ option {
 
 .details__info--container {
     display: flex;
-    align-items: flex-start;
     gap: 24px;
     overflow: hidden;
 }
@@ -325,12 +317,14 @@ option {
 .details__info {
     flex: 1;
     min-width: 0;
+    margin-top: 55px; 
 }
 
 .movie__detail {
     border-bottom: 1px solid rgba(134, 93, 204, .3);
     margin-top: 30px;
     justify-content: left;
+    text-align: left;
     font-family: 'roboto';
 }
 
@@ -435,18 +429,45 @@ footer {
 @media(max-width: 768px) {
     
     .title {
-        font-size: 62px;
+        font-size: 56px;
     }
     input {
-        width: 100%;
         font-size: 24px;
+        height: 50px;
+        margin-left: 16px;
     }
     button {
         width: 150px;
-        font-size: 24px;
+        height: 50px;
+        font-size: 20px;
+    }
+    .link {
+        margin: 0;
+    }
+    .sort {
+        display: flex;
+        align-items: center;
+        width: 150px;
+        height: 30px;
+        font-size: 16px;
+    }
+    .movie__search {
+        justify-content: center;
+    }
+    .movie {
+        width: 350px;
+        margin-left: 20px;
+    }
+    .movie-list {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: 24px;
     }
     .movie-card {
-        width: 75%;
+        width: 85%;
         margin: 12px;
+    }
+    .skeleton-card {
+        width: 350px;
     }
 }
