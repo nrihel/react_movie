@@ -637,6 +637,12 @@ footer {
     .nav {
         height: 100px;
     }
+    .details__button {
+        margin-left: 0;
+    }
+    .details-card__title {
+        margin-right: 0;
+    }
     .title {
         font-size: 36px;
     }
@@ -656,6 +662,7 @@ footer {
     } 
     .movie__detail {
         margin-top: 15px;
+        margin-right: 0;
     }
     .details-card {
         display: flex;
