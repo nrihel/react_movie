@@ -9,10 +9,6 @@ const Home = () => {
   let navigate = useNavigate();
   const [searchMovies, setSearchMovies] = useState([]);
 
-  function onSearch() {
-    movieSearch(searchMovies)
-  }
-
   console.log(process.env.REACT_APP_OMDB_API_KEY)
   async function movieSearch (title) {
     const { data } = await axios.get
