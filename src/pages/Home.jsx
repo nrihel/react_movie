@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import axios from 'axios';
 import "../moviestyle.css";
-import { useNavigate, , useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const Home = () => {
   let navigate = useNavigate();
