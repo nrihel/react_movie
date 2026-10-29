@@ -24,7 +24,7 @@ const Movies = () => {
         try {
             setLoading(true);
             const { data } = await axios.get(
-                `https://www.omdbapi.com/?apikey=db4e97d3&s=${title}`
+                `https://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_API_KEY}&s=${title}`
             );
         setSearchMovies(data.Search || []);
         } catch (error) {
