@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import axios from 'axios';
 import "../moviestyle.css";
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   let navigate = useNavigate();
@@ -18,11 +18,6 @@ const Home = () => {
     const { data } = await axios.get
     (`https://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_API_KEY}&s=${title}`)
     setSearchMovies(data);
-  }
-
-  function onSearchKeyPress(key) {
-    if (key === 'Enter')
-      onSearch()
   }
 
   return (
