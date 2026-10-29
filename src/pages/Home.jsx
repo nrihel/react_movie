@@ -1,29 +1,12 @@
 import React, { useState } from 'react'
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import axios from 'axios';
 import "../moviestyle.css";
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   let navigate = useNavigate();
   const [searchMovies, setSearchMovies] = useState([]);
-
-  function onSearch() {
-    movieSearch(searchMovies)
-  }
-
-  console.log(process.env.REACT_APP_OMDB_API_KEY)
-  async function movieSearch (title) {
-    const { data } = await axios.get
-    (`https://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_API_KEY}&s=${title}`)
-    setSearchMovies(data);
-  }
-
-  function onSearchKeyPress(key) {
-    if (key === 'Enter')
-      onSearch()
-  }
 
   return (
     <>
