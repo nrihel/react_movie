@@ -65,33 +65,29 @@ const Movies = () => {
         ) : (
         <>
             <div className="movie__search">
-            <button onClick={onSearch}>Search</button>
-
-            <input
-                type="text"
-                id="Title"
-                placeholder="Search by Title"
-                onChange={(event) => setSearchTitle(event.target.value)}
-                onKeyDown={(event) => event.key === 'Enter' && onSearch()}
-            />
-
-            <div className="sort">
-                <select
-                id="filter"
-                defaultValue=""
-                onChange={(event) =>
-                    setSearchMovies((movies) =>
-                    sortMovies(movies, event.target.value)
-                    )
-                }
-                >
-                <option value="" disabled>Sort</option>
-                <option value="newest">Newest</option>
-                <option value="oldest">Oldest</option>
-                <option value="a-z">A - Z</option>
-                <option value="z-a">Z - A</option>
-                </select>
-            </div>
+                <input
+                    type="text"
+                    id="Title"
+                    placeholder="Search by Title"
+                    onChange={(event) => setSearchTitle(event.target.value)}
+                    onKeyDown={(event) => event.key === 'Enter' && onSearch()}
+                />
+                <button onClick={onSearch}>Search</button>
+                    <select
+                    id="filter"
+                    defaultValue=""
+                    onChange={(event) =>
+                        setSearchMovies((movies) =>
+                        sortMovies(movies, event.target.value)
+                        )
+                    }
+                    >
+                    <option value="" disabled>Sort</option>
+                    <option value="newest">Newest</option>
+                    <option value="oldest">Oldest</option>
+                    <option value="a-z">A - Z</option>
+                    <option value="z-a">Z - A</option>
+                    </select>
             </div>
 
             <div className="movie-list">
