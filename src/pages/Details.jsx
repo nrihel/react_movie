@@ -17,7 +17,7 @@ const Details = () => {
         try {
             setLoading(true);
             const movieData = await axios.get(
-                `https://www.omdbapi.com/?apikey=db4e97d3&i=${imdbID}`
+                `https://www.omdbapi.com/?apikey=${process.env.REACT_APP_API_KEY}&i=${imdbID}`
             );
             setMovie(movieData.data);
         } catch (error) {
@@ -31,6 +31,7 @@ const Details = () => {
 
     useEffect(() => {
         getMovieDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [imdbID])
   return (
     <>
