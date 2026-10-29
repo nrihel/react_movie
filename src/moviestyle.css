@@ -70,6 +70,7 @@ h3 {
 }
 
 .link {
+    position: relative;
     font-size: 24px;
     margin-right: 36px;
     padding: 12px;
@@ -448,6 +449,12 @@ footer {
         width: 35vw;
     }
 }
+
+@media(max-width: 1043px) {
+    .skeleton-card:nth-child(2) {
+        display: none;
+    }
+}
 /*SMALL SCREENS*/
 @media(max-width: 960px) {
     .title {
@@ -539,7 +546,11 @@ footer {
         height: 100vh;
     }
 }
-
+@media(max-width: 763px) {
+    .skeleton-card:nth-child(1) {
+        display: none;
+    }
+}
 @media(max-width: 706px) {
     .logo {
         width: 85px;

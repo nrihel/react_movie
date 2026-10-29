@@ -3,14 +3,12 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import SearchSkeleton from '../components/SearchSkeleton';
 import axios from 'axios';
-import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const Movies = () => {
-    const {imdbID} = useParams();
     const [searchParams, setSearchParams] = useSearchParams()
     const title = searchParams.get('search') || '';
     const navigate = useNavigate();
-    const location = useLocation();
     const [searchMovies, setSearchMovies] = useState([]);
     const [searchTitle, setSearchTitle] = useState('');
     const [loading, setLoading] = useState(Boolean(title));
