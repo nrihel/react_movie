@@ -1,19 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import SearchSkeleton from '../components/SearchSkeleton';
 import axios from 'axios';
 import "../moviestyle.css";
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 const Home = () => {
-  const {imdbID} = useParams();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const title = searchParams.get('search') || '';
   let navigate = useNavigate();
-  const [movies, setMovies] = useState([]);
   const [searchMovies, setSearchMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   function onSearch() {
     movieSearch(searchMovies)
