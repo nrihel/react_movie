@@ -674,9 +674,11 @@ footer {
     .details__header {
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
     .details__button {
-        width: auto;
+        width: 150px;
         height: auto;
         padding: 8px;
         font-size: 16px;
@@ -698,6 +700,13 @@ footer {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+    }
+    .skeleton-title {
+        width: 200px;
+        margin-left: 0;
+    }
+    .skeleton-button {
+        margin-left: 0;
     }
 }
 @media(max-width: 421px) {
@@ -722,11 +731,7 @@ footer {
         margin-left: 0;
         text-align: center;
     }
-    button {
-        font-size: 14px;
-        height: 30px;
-        margin-left: 0;
-    }
+
     .details {
         width: auto;
         height: auto;
@@ -742,7 +747,7 @@ footer {
         z-index: 1;
     }
     .details__button {
-        width: auto;
+        width: 150px;
         height: auto;
         padding: 8px;
         font-size: 16px;
